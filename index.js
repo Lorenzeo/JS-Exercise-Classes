@@ -85,14 +85,20 @@ class Car {
     this.tank += gallons
   }  
   drive (distance){
-    this.odometer += distance
-    this.tank = (distance - this.milesPerGallon)
-    if(this.tank === 0){
-      return `I ran out of fuel at ${this.odometer} miles!`
+    let milesLeft = this.tank * this.milesPerGallon;
+    if(distance <= milesLeft){
+      this.odometer += distance
+      this.tank -= distance / this.milesPerGallon
+    }else{
+      this.odometer += milesLeft
+      this.tank = 0
+      return ` I ran out of fuel at ${this.odometer} miles!`
     }
+    }
+  
   } 
   
-}
+
   
 
 
@@ -141,13 +147,14 @@ class Instructor extends Lambdasian{
   this.favLanguage = bloomer.favLanguage
   this.catchPhrase = bloomer.catchPhrase
 }
-demo(){
+demo(subject){
   return `Today we are learning about ${subject}`
 }
-grade(){
+grade(student,subject){
   return `${student.name} receives a perfect score on ${subject}`
 }
 }
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -169,15 +176,16 @@ super(bloomer)
 this.previousBackground = bloomer.previousBackground
 this.className = bloomer.className
 this.favSubjects = bloomer.favSubjects
+this.grade = 50
 }
 listSubjects(){
-  return `Loving ${favSubjects}`
+  return `Loving ${this.favSubjects}`
 }
-PRAssignment(){
-  return `${student.name} has submitted a PR for ${subject}`
+PRAssignment(subject){
+  return `${this.name} has submitted a PR for ${subject}`
 }
-sprintChallenge(){
-  return `${student.name} has begun sprint challenge on ${subject}`
+sprintChallenge(subject){
+  return `${this.name} has begun sprint challenge on ${subject}`
 }
 }
    
@@ -202,11 +210,11 @@ class ProjectManager extends Instructor {
      this.gradClassName = bloomer.gradClassName
      this.favInstructor = bloomer.favInstructor
    }
-   standUp (){
-    return `${name} announces to ${channel}, @channel standy times!`
+   standUp (channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`
    }
-   debugsCode (){
-     return `${name} debugs ${student.name}'s code on ${subject}`
+   debugsCode (student,subject){
+     return `${this.name} debugs ${student.name}'s code on ${subject}`
    }
 }
 /*

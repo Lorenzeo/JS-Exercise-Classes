@@ -187,6 +187,13 @@ PRAssignment(subject){
 sprintChallenge(subject){
   return `${this.name} has begun sprint challenge on ${subject}`
 }
+checkGrade (grade){
+  if(grade > 70){
+    return `Congrats ${this.name} you have graduated`
+  }else {
+    
+  }
+}
 }
    
 
